@@ -174,11 +174,13 @@ function checkAdStatus() {
         const youtubePlayer = document.getElementById('youtube-player');
         if (youtubePlayer) {
             if (isLikelyAd) {
-                // 広告と判定 -> プレーヤーを縮小
+                // 広告と判定 -> プレーヤーを縮小、オーバーレイを切り抜く
                 youtubePlayer.classList.add('ad-playing');
+                elements.videoOverlay.classList.add('ad-playing');
             } else {
-                // 本編と判定 -> プレーヤーを元のサイズに
+                // 本編と判定 -> プレーヤーを元のサイズに、オーバーレイを全画面に
                 youtubePlayer.classList.remove('ad-playing');
+                elements.videoOverlay.classList.remove('ad-playing');
             }
         }
     } catch (error) {
@@ -198,6 +200,7 @@ function startAdDetection() {
     if (youtubePlayer) {
         youtubePlayer.classList.remove('ad-playing');
     }
+    elements.videoOverlay.classList.remove('ad-playing');
 
     // 100msごとに広告状態をチェック
     adCheckInterval = setInterval(checkAdStatus, 100);
@@ -214,6 +217,7 @@ function stopAdDetection() {
     if (youtubePlayer) {
         youtubePlayer.classList.remove('ad-playing');
     }
+    elements.videoOverlay.classList.remove('ad-playing');
 }
 
 // 再生/一時停止ボタンの更新
