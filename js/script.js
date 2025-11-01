@@ -215,7 +215,7 @@ function stopAdDetection() {
     // プレーヤーを元のサイズに戻す
     if (gameState.player) {
         const container = elements.youtubePlayer.parentElement;
-        gameState.player.setSize(container.offsetWidth, container.offsetHeight);
+        gameState.player.setSize(640, 360);
         elements.youtubePlayer.style.top = '0';
         elements.youtubePlayer.style.left = '0';
         elements.youtubePlayer.style.bottom = '';
