@@ -168,7 +168,7 @@ function checkAdStatus() {
         // 1. UNSTARTED状態（広告再生中）
         // 2. 動画の長さが取得できない場合
         const isLikelyAd =
-            (playerState === YT.PlayerState.UNSTARTED && currentTime === 0) ||
+            (playerState === YT.PlayerState.UNSTARTED && currentTime > 0) ||
             duration === 0;
 
         const youtubePlayer = document.getElementById('youtube-player');
