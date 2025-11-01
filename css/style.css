@@ -418,6 +418,11 @@ body {
     color: var(--text-color);
 }
 
+.total-answer-time {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
 .result-message {
     font-size: 1.3rem;
     line-height: 1.8;
