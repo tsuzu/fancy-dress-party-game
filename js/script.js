@@ -32,7 +32,7 @@ const elements = {
     feedbackDetails: document.getElementById('feedback-details'),
     nextButton: document.getElementById('next-button'),
     videoOverlay: document.getElementById('video-overlay'),
-    adBlurOverlay: document.getElementById('ad-blur-overlay'),
+    youtubePlayer: document.getElementById('youtube-player'),
 
     // 結果画面
     finalScore: document.getElementById('final-score'),
@@ -173,13 +173,11 @@ function checkAdStatus() {
             duration === 0;
 
         if (isLikelyAd) {
-            // 広告と判定 -> cropとblurを有効化
-            elements.videoOverlay.classList.add('ad-playing');
-            elements.adBlurOverlay.classList.add('ad-playing');
+            // 広告と判定 -> プレーヤーを縮小
+            elements.youtubePlayer.classList.add('ad-playing');
         } else {
-            // 本編と判定 -> cropとblurを無効化
-            elements.videoOverlay.classList.remove('ad-playing');
-            elements.adBlurOverlay.classList.remove('ad-playing');
+            // 本編と判定 -> プレーヤーを元のサイズに
+            elements.youtubePlayer.classList.remove('ad-playing');
         }
     } catch (error) {
         console.error('広告チェックエラー:', error);
@@ -194,8 +192,7 @@ function startAdDetection() {
     }
 
     // 最初は広告モードをオフにする
-    elements.videoOverlay.classList.remove('ad-playing');
-    elements.adBlurOverlay.classList.remove('ad-playing');
+    elements.youtubePlayer.classList.remove('ad-playing');
 
     // 100msごとに広告状態をチェック
     adCheckInterval = setInterval(checkAdStatus, 100);
@@ -207,8 +204,7 @@ function stopAdDetection() {
         clearInterval(adCheckInterval);
         adCheckInterval = null;
     }
-    elements.videoOverlay.classList.remove('ad-playing');
-    elements.adBlurOverlay.classList.remove('ad-playing');
+    elements.youtubePlayer.classList.remove('ad-playing');
 }
 
 // 再生/一時停止ボタンの更新
