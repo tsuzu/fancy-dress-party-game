@@ -23,6 +23,7 @@ const elements = {
 
     // ゲーム画面
     scoreDisplay: document.getElementById('score'),
+    totalTimeSoFar: document.getElementById('total-time-sofar'),
     totalQuestionsDisplay: document.getElementById('total-questions'),
     currentQuestionDisplay: document.getElementById('current-question'),
     totalQuestionsProgressDisplay: document.getElementById('total-questions-progress'),
@@ -360,6 +361,7 @@ function selectAnswer(selectedIndex) {
         gameState.score++;
         elements.scoreDisplay.textContent = gameState.score;
     }
+    elements.totalTimeSoFar.textContent = gameState.answerTimes.reduce((a, b) => a + b, 0).toFixed(2) + '';
 
     // フィードバック表示
     showFeedback(isCorrect, question, timeTaken);
