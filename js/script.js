@@ -270,6 +270,12 @@ function showFeedback(isCorrect, question) {
     const correctAnswer = question.options[question.correctAnswerIndex];
     let detailsHTML = `<strong>正解: ${correctAnswer}</strong>`;
 
+    // 動画リンクを追加
+    if (question.videoId && question.videoTitle) {
+        const videoUrl = `https://www.youtube.com/watch?v=${question.videoId}`;
+        detailsHTML += `<br><br>📺 <a href="${videoUrl}" target="_blank" rel="noopener noreferrer">${question.videoTitle}</a>`;
+    }
+
     if (question.songTitle) {
         detailsHTML += `<br>曲名: ${question.songTitle}`;
     }
