@@ -6,7 +6,9 @@ const gameState = {
     questions: [],
     player: null,
     isPlaying: false,
-    hasAnswered: false
+    hasAnswered: false,
+    playingStartTime: null,
+    answerTimes: []
 };
 
 // DOM要素
@@ -38,6 +40,7 @@ const elements = {
     finalScore: document.getElementById('final-score'),
     finalTotal: document.getElementById('final-total'),
     accuracy: document.getElementById('accuracy'),
+    totalTime: document.getElementById('total-time'),
     resultMessage: document.getElementById('result-message'),
     restartButton: document.getElementById('restart-button'),
     shareButton: document.getElementById('share-button')
@@ -143,6 +146,10 @@ function onPlayerStateChange(event) {
     checkAdStatus()
     if (event.data === YT.PlayerState.PLAYING) {
         gameState.isPlaying = true;
+        // PLAYING状態になった時刻を記録（まだ回答していない場合のみ）
+        if (!gameState.hasAnswered && gameState.playingStartTime === null) {
+            gameState.playingStartTime = Date.now();
+        }
     } else if (event.data === YT.PlayerState.ENDED) {
         gameState.isPlaying = false;
         // 動画終了時は広告検出を停止
@@ -310,6 +317,7 @@ function loadQuestion() {
 
     // YouTube動画の読み込み
     initYouTubePlayer(question.videoId, question.startTime || 0);
+    gameState.playingStartTime = null;
 
     // 広告検出を開始
     startAdDetection();
@@ -318,8 +326,17 @@ function loadQuestion() {
 // 回答選択
 function selectAnswer(selectedIndex) {
     if (gameState.hasAnswered) return;
-
     gameState.hasAnswered = true;
+
+    const currentTime = Date.now();
+    let timeTaken = 0;
+    if (gameState.playingStartTime) {
+        timeTaken = (currentTime - gameState.playingStartTime) / 1000; // 秒単位
+        gameState.answerTimes.push(timeTaken);
+
+        gameState.playingStartTime = null;
+    }
+
     const question = gameState.questions[gameState.currentQuestionIndex];
     const isCorrect = selectedIndex === question.correctAnswerIndex;
 
@@ -342,11 +359,11 @@ function selectAnswer(selectedIndex) {
     }
 
     // フィードバック表示
-    showFeedback(isCorrect, question);
+    showFeedback(isCorrect, question, timeTaken);
 }
 
 // フィードバック表示
-function showFeedback(isCorrect, question) {
+function showFeedback(isCorrect, question, timeTaken) {
     elements.feedbackContainer.classList.remove('hidden');
 
     // メッセージ
@@ -379,6 +396,10 @@ function showFeedback(isCorrect, question) {
 
     if (question.explanation) {
         detailsHTML += `<br><br>${question.explanation}`;
+    }
+
+    if (timeTaken > 0) {
+        detailsHTML += `<br><br>回答時間: ${timeTaken.toFixed(2)} 秒`;
     }
 
     elements.feedbackDetails.innerHTML = detailsHTML;
@@ -415,6 +436,7 @@ function showResults() {
     elements.finalScore.textContent = gameState.score;
     elements.finalTotal.textContent = gameState.totalQuestions;
     elements.accuracy.textContent = accuracy;
+    elements.totalTime.textContent = gameState.answerTimes.reduce((a, b) => a + b, 0).toFixed(2) + '';
 
     // メッセージ
     let message = '';
@@ -450,9 +472,10 @@ function shareOnX() {
     const score = gameState.score;
     const total = gameState.totalQuestions;
     const accuracy = Math.round((score / total) * 100);
+    const totalTime = gameState.answerTimes.reduce((a, b) => a + b, 0).toFixed(2);
 
     // シェアテキストを作成
-    const text = `🎃 仮装狂騒曲当てゲーム 🎵で${total}問中${score}問正解！正解率${accuracy}%でした！🎵\n#仮装狂騒曲当てゲーム`;
+    const text = `🎃 仮装狂騒曲当てゲーム 🎵で${total}問中${score}問正解！正解率${accuracy}% 総回答時間${totalTime}秒でした！🎵\n#仮装狂騒曲当てゲーム`;
 
     // 現在のページURLを取得
     const url = window.location.href;
