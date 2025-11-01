@@ -1,0 +1,460 @@
+/* リセット & 基本設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #FF6B6B;
+    --secondary-color: #4ECDC4;
+    --background-color: #1A1A2E;
+    --surface-color: #252541;
+    --text-color: #EAEAEA;
+    --text-secondary: #B0B0B0;
+    --correct-color: #51CF66;
+    --incorrect-color: #FF6B6B;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--background-color) 0%, #16213E 100%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 画面管理 */
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* コンテナ */
+.container {
+    background-color: var(--surface-color);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+}
+
+/* スタート画面 */
+.game-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-description {
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: var(--text-secondary);
+}
+
+/* ボタン */
+.btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #FF8E53);
+    color: white;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #FF8E53, var(--primary-color));
+}
+
+.btn-control {
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 1rem;
+    padding: 12px 30px;
+}
+
+/* ゲーム画面 */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.score-display,
+.progress-display {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.score-display span,
+.progress-display span {
+    color: var(--secondary-color);
+}
+
+/* YouTube動画エリア */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 アスペクト比 */
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+#youtube-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(37, 37, 65, 0.95));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.overlay-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.video-overlay p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+/* 問題エリア */
+.question-container {
+    margin-bottom: 30px;
+}
+
+.question-text {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.option-btn {
+    padding: 20px;
+    font-size: 1.1rem;
+    background-color: rgba(78, 205, 196, 0.1);
+    border: 2px solid var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.option-btn:hover:not(:disabled) {
+    background-color: rgba(78, 205, 196, 0.2);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.option-btn.correct {
+    background-color: var(--correct-color);
+    border-color: var(--correct-color);
+    color: white;
+    animation: correctPulse 0.5s ease;
+}
+
+.option-btn.incorrect {
+    background-color: var(--incorrect-color);
+    border-color: var(--incorrect-color);
+    color: white;
+    animation: shake 0.5s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+/* フィードバックエリア */
+.feedback-container {
+    text-align: center;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.5s ease;
+}
+
+.feedback-container.hidden {
+    display: none;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feedback-message {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.feedback-message.correct {
+    color: var(--correct-color);
+}
+
+.feedback-message.incorrect {
+    color: var(--incorrect-color);
+}
+
+.feedback-details {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: var(--text-secondary);
+}
+
+.feedback-details strong {
+    color: var(--text-color);
+    display: block;
+    margin-top: 15px;
+}
+
+/* 結果画面 */
+.result-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.result-content {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.final-score {
+    margin-bottom: 30px;
+}
+
+.score-label {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.score-value {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.score-percentage {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.result-message {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+    }
+
+    .game-title {
+        font-size: 2rem;
+    }
+
+    .game-description {
+        font-size: 1rem;
+    }
+
+    .game-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .score-display,
+    .progress-display {
+        font-size: 1rem;
+    }
+
+    .question-text {
+        font-size: 1.2rem;
+    }
+
+    .options-container {
+        grid-template-columns: 1fr;
+    }
+
+    .option-btn {
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    .overlay-icon {
+        font-size: 3rem;
+    }
+
+    .video-overlay p {
+        font-size: 1rem;
+    }
+
+    .score-value {
+        font-size: 3rem;
+    }
+
+    .result-title {
+        font-size: 2rem;
+    }
+
+    .result-message {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .game-title {
+        font-size: 1.5rem;
+    }
+
+    .feedback-message {
+        font-size: 1.5rem;
+    }
+}
+
+/* ユーティリティ */
+.hidden {
+    display: none !important;
+}

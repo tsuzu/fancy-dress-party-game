@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube音声当てゲーム</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- スタート画面 -->
+    <div id="start-screen" class="screen active">
+        <div class="container">
+            <h1 class="game-title">🎵 YouTube音声当てゲーム</h1>
+            <p class="game-description">
+                カバー曲の音声を聴いて、誰が歌っているか当てよう！<br>
+                映像は見えないので、声だけが頼りです。
+            </p>
+            <button id="start-button" class="btn btn-primary">ゲームスタート</button>
+        </div>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div id="game-screen" class="screen">
+        <div class="container">
+            <!-- ヘッダー -->
+            <div class="game-header">
+                <div class="score-display">
+                    スコア: <span id="score">0</span> / <span id="total-questions">0</span>
+                </div>
+                <div class="progress-display">
+                    問題 <span id="current-question">1</span> / <span id="total-questions-progress">0</span>
+                </div>
+            </div>
+
+            <!-- YouTube動画エリア -->
+            <div class="video-container">
+                <div id="youtube-player"></div>
+                <div class="video-overlay">
+                    <div class="overlay-icon">🎵</div>
+                    <p>音声のみ再生中...</p>
+                </div>
+                <div class="video-controls">
+                    <button id="play-pause-btn" class="btn btn-control">▶ 再生</button>
+                </div>
+            </div>
+
+            <!-- 問題エリア -->
+            <div class="question-container">
+                <h2 id="question-text" class="question-text">この曲を歌っているのは誰？</h2>
+                <div id="options-container" class="options-container">
+                    <!-- 選択肢はJavaScriptで動的に生成 -->
+                </div>
+            </div>
+
+            <!-- フィードバックエリア -->
+            <div id="feedback-container" class="feedback-container hidden">
+                <div id="feedback-message" class="feedback-message"></div>
+                <div id="feedback-details" class="feedback-details"></div>
+                <button id="next-button" class="btn btn-primary">次の問題へ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 結果画面 -->
+    <div id="result-screen" class="screen">
+        <div class="container">
+            <h1 class="result-title">ゲーム終了！</h1>
+            <div class="result-content">
+                <div class="final-score">
+                    <div class="score-label">あなたのスコア</div>
+                    <div class="score-value">
+                        <span id="final-score">0</span> / <span id="final-total">0</span>
+                    </div>
+                    <div class="score-percentage">正解率: <span id="accuracy">0</span>%</div>
+                </div>
+                <div id="result-message" class="result-message"></div>
+            </div>
+            <button id="restart-button" class="btn btn-primary">もう一度プレイ</button>
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

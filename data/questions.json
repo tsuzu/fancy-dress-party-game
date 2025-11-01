@@ -1,0 +1,84 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "videoId": "dQw4w9WgXcQ",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "options": [
+        "Rick Astley",
+        "Michael Jackson",
+        "George Michael",
+        "Phil Collins"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "Rick Astleyの名曲「Never Gonna Give You Up」です。インターネットミームとしても有名な曲ですね！",
+      "songTitle": "Never Gonna Give You Up",
+      "originalArtist": "Rick Astley"
+    },
+    {
+      "id": 2,
+      "videoId": "kJQP7kiw5Fk",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "options": [
+        "Luis Fonsi",
+        "Enrique Iglesias",
+        "Ricky Martin",
+        "Marc Anthony"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "Luis Fonsi ft. Daddy Yankeeの「Despacito」です。2017年に世界中で大ヒットしました！",
+      "songTitle": "Despacito",
+      "originalArtist": "Luis Fonsi ft. Daddy Yankee"
+    },
+    {
+      "id": 3,
+      "videoId": "9bZkp7q19f0",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "options": [
+        "PSY",
+        "BTS",
+        "BIGBANG",
+        "EXO"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "PSYの「Gangnam Style」です。YouTubeで初めて10億再生を達成した伝説的な楽曲です！",
+      "songTitle": "Gangnam Style",
+      "originalArtist": "PSY"
+    },
+    {
+      "id": 4,
+      "videoId": "fJ9rUzIMcZQ",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "options": [
+        "Queen",
+        "The Beatles",
+        "Led Zeppelin",
+        "The Rolling Stones"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "Queenの「Bohemian Rhapsody」です。史上最も偉大なロック曲の一つとして知られています！",
+      "songTitle": "Bohemian Rhapsody",
+      "originalArtist": "Queen"
+    },
+    {
+      "id": 5,
+      "videoId": "OPf0YbXqDm0",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "options": [
+        "Mark Ronson ft. Bruno Mars",
+        "Justin Timberlake",
+        "The Weeknd",
+        "Charlie Puth"
+      ],
+      "correctAnswerIndex": 0,
+      "explanation": "Mark Ronson ft. Bruno Marsの「Uptown Funk」です。2014年リリースの大ヒットファンクソングです！",
+      "songTitle": "Uptown Funk",
+      "originalArtist": "Mark Ronson ft. Bruno Mars"
+    }
+  ]
+}
