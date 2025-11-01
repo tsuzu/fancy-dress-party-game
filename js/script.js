@@ -187,7 +187,7 @@ function checkAdStatus() {
 
                 // 5秒経過したらblurを表示
                 const elapsedTime = (Date.now() - adStartTime) / 1000;
-                if (elapsedTime >= 5) {
+                if (elapsedTime >= 6) {
                     elements.adBlur.classList.add('show');
                 } else {
                     elements.adBlur.classList.remove('show');
