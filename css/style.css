@@ -168,6 +168,16 @@ body {
     left: auto;
 }
 
+/* 広告再生中はオーバーレイを右下だけ切り抜く */
+.video-overlay.ad-playing {
+    clip-path: polygon(
+        0 0, 100% 0, 100% calc(100% - 56px),
+        calc(100% - 100px) calc(100% - 56px),
+        calc(100% - 100px) 100%,
+        0 100%
+    );
+}
+
 .video-overlay {
     position: absolute;
     top: 0;
