@@ -32,7 +32,6 @@ const elements = {
     feedbackDetails: document.getElementById('feedback-details'),
     nextButton: document.getElementById('next-button'),
     videoOverlay: document.getElementById('video-overlay'),
-    youtubePlayer: document.getElementById('youtube-player'),
 
     // 結果画面
     finalScore: document.getElementById('final-score'),
@@ -172,23 +171,15 @@ function checkAdStatus() {
             playerState === YT.PlayerState.UNSTARTED ||
             duration === 0;
 
-        if (isLikelyAd) {
-            // 広告と判定 -> プレーヤーを縮小
-            gameState.player.setSize(100, 56);
-            // 右下に配置
-            elements.youtubePlayer.style.top = 'auto';
-            elements.youtubePlayer.style.left = 'auto';
-            elements.youtubePlayer.style.bottom = '0';
-            elements.youtubePlayer.style.right = '0';
-        } else {
-            // 本編と判定 -> プレーヤーを元のサイズに
-            const container = elements.youtubePlayer.parentElement;
-            gameState.player.setSize(640, 360);
-            // 全画面に配置
-            elements.youtubePlayer.style.top = '0';
-            elements.youtubePlayer.style.left = '0';
-            elements.youtubePlayer.style.bottom = '';
-            elements.youtubePlayer.style.right = '';
+        const youtubePlayer = document.getElementById('youtube-player');
+        if (youtubePlayer) {
+            if (isLikelyAd) {
+                // 広告と判定 -> プレーヤーを縮小
+                youtubePlayer.classList.add('ad-playing');
+            } else {
+                // 本編と判定 -> プレーヤーを元のサイズに
+                youtubePlayer.classList.remove('ad-playing');
+            }
         }
     } catch (error) {
         console.error('広告チェックエラー:', error);
@@ -202,6 +193,12 @@ function startAdDetection() {
         clearInterval(adCheckInterval);
     }
 
+    // 最初は広告モードをオフにする
+    const youtubePlayer = document.getElementById('youtube-player');
+    if (youtubePlayer) {
+        youtubePlayer.classList.remove('ad-playing');
+    }
+
     // 100msごとに広告状態をチェック
     adCheckInterval = setInterval(checkAdStatus, 100);
 }
@@ -213,13 +210,9 @@ function stopAdDetection() {
         adCheckInterval = null;
     }
     // プレーヤーを元のサイズに戻す
-    if (gameState.player) {
-        const container = elements.youtubePlayer.parentElement;
-        gameState.player.setSize(640, 360);
-        elements.youtubePlayer.style.top = '0';
-        elements.youtubePlayer.style.left = '0';
-        elements.youtubePlayer.style.bottom = '';
-        elements.youtubePlayer.style.right = '';
+    const youtubePlayer = document.getElementById('youtube-player');
+    if (youtubePlayer) {
+        youtubePlayer.classList.remove('ad-playing');
     }
 }
 
