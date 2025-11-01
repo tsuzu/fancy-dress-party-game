@@ -172,6 +172,16 @@ body {
     z-index: 10;
 }
 
+/* 広告再生中のみ右下を切り抜く */
+.video-overlay.ad-playing {
+    clip-path: polygon(
+        0 0, 100% 0, 100% calc(100% - 80px),
+        calc(100% - 120px) calc(100% - 80px),
+        calc(100% - 120px) 100%,
+        0 100%
+    );
+}
+
 .overlay-icon {
     font-size: 5rem;
     margin-bottom: 20px;
