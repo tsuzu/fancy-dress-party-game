@@ -10,9 +10,9 @@
     <!-- スタート画面 -->
     <div id="start-screen" class="screen active">
         <div class="container">
-            <h1 class="game-title">🎵 YouTube音声当てゲーム</h1>
+            <h1 class="game-title">🎃 仮装狂騒曲当てゲーム 🎵</h1>
             <p class="game-description">
-                カバー曲の音声を聴いて、誰が歌っているか当てよう！<br>
+                仮装狂騒曲の音声を聴いて、誰が歌っているか当てよう！<br>
                 映像は見えないので、声だけが頼りです。
             </p>
             <button id="start-button" class="btn btn-primary">ゲームスタート</button>
@@ -75,7 +75,15 @@
                 </div>
                 <div id="result-message" class="result-message"></div>
             </div>
-            <button id="restart-button" class="btn btn-primary">もう一度プレイ</button>
+            <div class="result-buttons">
+                <button id="share-button" class="btn btn-share">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    Xでシェア
+                </button>
+                <button id="restart-button" class="btn btn-primary">もう一度プレイ</button>
+            </div>
         </div>
     </div>
 

@@ -37,7 +37,8 @@ const elements = {
     finalTotal: document.getElementById('final-total'),
     accuracy: document.getElementById('accuracy'),
     resultMessage: document.getElementById('result-message'),
-    restartButton: document.getElementById('restart-button')
+    restartButton: document.getElementById('restart-button'),
+    shareButton: document.getElementById('share-button')
 };
 
 // 配列をシャッフルする関数（Fisher-Yatesアルゴリズム）
@@ -346,6 +347,25 @@ function togglePlayPause() {
     }
 }
 
+// Xでシェア
+function shareOnX() {
+    const score = gameState.score;
+    const total = gameState.totalQuestions;
+    const accuracy = Math.round((score / total) * 100);
+
+    // シェアテキストを作成
+    const text = `仮装狂騒曲当てゲームで${total}問中${score}問正解！正解率${accuracy}%でした！🎵\n#仮装狂騒曲当てゲーム`;
+
+    // 現在のページURLを取得
+    const url = window.location.href;
+
+    // X（旧Twitter）のシェアURL
+    const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+
+    // 新しいウィンドウで開く
+    window.open(shareUrl, '_blank', 'width=550,height=420');
+}
+
 // イベントリスナーの設定
 function setupEventListeners() {
     elements.startButton.addEventListener('click', startGame);
@@ -354,6 +374,7 @@ function setupEventListeners() {
     elements.restartButton.addEventListener('click', () => {
         showScreen('start');
     });
+    elements.shareButton.addEventListener('click', shareOnX);
 }
 
 // 初期化
