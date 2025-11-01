@@ -129,14 +129,14 @@ body {
 }
 
 .score-display,
-.progress-display
+.progress-display,
 .total-time-display {
     font-size: 1.2rem;
     font-weight: 600;
 }
 
 .score-display span,
-.progress-display span
+.progress-display span,
 .total-time-display span {
     color: var(--secondary-color);
 }
