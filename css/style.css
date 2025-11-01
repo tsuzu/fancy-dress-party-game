@@ -185,8 +185,8 @@ body {
     right: 0;
     width: 100px;
     height: 56px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     background: rgba(0, 0, 0, 0.3);
     z-index: 5;
     pointer-events: none;
@@ -209,6 +209,10 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 10;
+}
+
+.video-overlay.hidden {
+    display: none;
 }
 
 .overlay-icon {
