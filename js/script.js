@@ -141,45 +141,68 @@ function onPlayerReady(event) {
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
         gameState.isPlaying = true;
-        // 実際の動画が再生開始されたら広告モードを解除
-        checkAndRemoveAdMode();
+    } else if (event.data === YT.PlayerState.ENDED) {
+        gameState.isPlaying = false;
+        // 動画終了時は広告検出を停止
+        stopAdDetection();
     } else {
         gameState.isPlaying = false;
     }
     updatePlayPauseButton();
 }
 
-// 広告モードのチェックと解除
-function checkAndRemoveAdMode() {
+// 広告検出用のインターバルID
+let adCheckInterval = null;
+
+// 広告の検出と表示切り替え
+function checkAdStatus() {
     if (!gameState.player) return;
 
-    // 動画の現在時間を取得して、実際に動画が再生されているか確認
-    const currentTime = gameState.player.getCurrentTime();
+    try {
+        const playerState = gameState.player.getPlayerState();
+        const currentTime = gameState.player.getCurrentTime();
+        const duration = gameState.player.getDuration();
 
-    // 広告が終わって本編が始まった場合（現在時間が0秒以上）
-    if (currentTime > 0 || (currentTime === 0 && gameState.player.getPlayerState() === YT.PlayerState.PLAYING)) {
-        // 少し遅延を入れて確実に動画が始まったことを確認
-        setTimeout(() => {
-            if (gameState.player && gameState.player.getCurrentTime() > 0) {
-                elements.videoOverlay.classList.remove('ad-playing');
-            }
-        }, 1000);
-    }
-}
+        // プレーヤーが再生中の場合
+        if (playerState === YT.PlayerState.PLAYING || playerState === YT.PlayerState.BUFFERING) {
+            // 広告判定: 現在時間が0未満、または動画の長さが取得できない場合は広告の可能性
+            // また、急に時間が0に戻った場合も広告の可能性
+            const isLikelyAd = currentTime < 0.5 && duration === 0;
 
-// 問題読み込み時に広告モードを有効化
-function enableAdMode() {
-    elements.videoOverlay.classList.add('ad-playing');
-
-    // 10秒後に広告モードを自動解除（広告がない場合の対策）
-    setTimeout(() => {
-        if (gameState.player && gameState.player.getPlayerState() === YT.PlayerState.PLAYING) {
-            const currentTime = gameState.player.getCurrentTime();
-            if (currentTime > 0) {
+            if (isLikelyAd) {
+                // 広告と判定 -> cropを有効化
+                elements.videoOverlay.classList.add('ad-playing');
+            } else if (currentTime > 0.5 && duration > 0) {
+                // 本編と判定 -> cropを無効化
                 elements.videoOverlay.classList.remove('ad-playing');
             }
         }
-    }, 10000);
+    } catch (error) {
+        console.error('広告チェックエラー:', error);
+    }
+}
+
+// 広告検出を開始
+function startAdDetection() {
+    // 既存のインターバルをクリア
+    if (adCheckInterval) {
+        clearInterval(adCheckInterval);
+    }
+
+    // 最初は広告モードをオフにする
+    elements.videoOverlay.classList.remove('ad-playing');
+
+    // 500msごとに広告状態をチェック
+    adCheckInterval = setInterval(checkAdStatus, 500);
+}
+
+// 広告検出を停止
+function stopAdDetection() {
+    if (adCheckInterval) {
+        clearInterval(adCheckInterval);
+        adCheckInterval = null;
+    }
+    elements.videoOverlay.classList.remove('ad-playing');
 }
 
 // 再生/一時停止ボタンの更新
@@ -252,8 +275,8 @@ function loadQuestion() {
     // YouTube動画の読み込み
     initYouTubePlayer(question.videoId, question.startTime || 0);
 
-    // 広告モードを有効化
-    enableAdMode();
+    // 広告検出を開始
+    startAdDetection();
 }
 
 // 回答選択
@@ -327,6 +350,9 @@ function showFeedback(isCorrect, question) {
 
 // 次の問題へ
 function nextQuestion() {
+    // 広告検出を停止
+    stopAdDetection();
+
     gameState.currentQuestionIndex++;
 
     if (gameState.currentQuestionIndex < gameState.totalQuestions) {
@@ -338,6 +364,9 @@ function nextQuestion() {
 
 // 結果表示
 function showResults() {
+    // 広告検出を停止
+    stopAdDetection();
+
     // 動画を停止
     if (gameState.player) {
         gameState.player.stopVideo();
