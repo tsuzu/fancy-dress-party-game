@@ -183,7 +183,7 @@ function checkAdStatus() {
         } else {
             // 本編と判定 -> プレーヤーを元のサイズに
             const container = elements.youtubePlayer.parentElement;
-            gameState.player.setSize(container.offsetWidth, container.offsetHeight);
+            gameState.player.setSize(640, 360);
             // 全画面に配置
             elements.youtubePlayer.style.top = '0';
             elements.youtubePlayer.style.left = '0';
