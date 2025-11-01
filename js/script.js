@@ -40,13 +40,56 @@ const elements = {
     restartButton: document.getElementById('restart-button')
 };
 
+// 配列をシャッフルする関数（Fisher-Yatesアルゴリズム）
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+// ランダムな選択肢を生成する
+function generateOptions(correctAnswer, allAnswers, count = 4) {
+    // 正解以外の選択肢を取得
+    const wrongAnswers = allAnswers.filter(answer => answer !== correctAnswer);
+
+    // ランダムに3つの不正解を選択
+    const shuffledWrong = shuffleArray(wrongAnswers);
+    const selectedWrong = shuffledWrong.slice(0, count - 1);
+
+    // 正解と不正解を組み合わせてシャッフル
+    const options = shuffleArray([correctAnswer, ...selectedWrong]);
+
+    return options;
+}
+
 // 問題データの読み込み
 async function loadQuestions() {
     try {
         const response = await fetch('data/questions.json');
         const data = await response.json();
-        gameState.questions = data.questions;
-        gameState.totalQuestions = data.questions.length;
+
+        // 全ての問題からユニークな回答者リストを作成
+        const allAnswers = [...new Set(data.questions.map(q => q.correctAnswer))];
+
+        // 各問題に選択肢を生成
+        gameState.questions = data.questions.map(question => {
+            const options = generateOptions(question.correctAnswer, allAnswers, 4);
+            const correctAnswerIndex = options.indexOf(question.correctAnswer);
+
+            return {
+                ...question,
+                options: options,
+                correctAnswerIndex: correctAnswerIndex
+            };
+        });
+
+        // 問題をシャッフル
+        gameState.questions = shuffleArray(gameState.questions);
+        gameState.totalQuestions = gameState.questions.length;
+
         return true;
     } catch (error) {
         console.error('問題データの読み込みに失敗しました:', error);
