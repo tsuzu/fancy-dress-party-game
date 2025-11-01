@@ -182,6 +182,24 @@ body {
     );
 }
 
+/* 広告のスキップボタンエリアにブラーをかける */
+.ad-blur-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 120px;
+    height: 80px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 15;
+    pointer-events: none;
+    display: none;
+}
+
+.ad-blur-overlay.ad-playing {
+    display: block;
+}
+
 .overlay-icon {
     font-size: 5rem;
     margin-bottom: 20px;
