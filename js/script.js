@@ -286,9 +286,11 @@ async function startGame() {
     gameState.currentQuestionIndex = 0;
     gameState.score = 0;
     gameState.hasAnswered = false;
+    gameState.answerTimes = [];
 
     // UI更新
     elements.scoreDisplay.textContent = '0';
+    elements.totalTimeSoFar.textContent = '0';
     elements.totalQuestionsDisplay.textContent = gameState.totalQuestions;
     elements.totalQuestionsProgressDisplay.textContent = gameState.totalQuestions;
 
