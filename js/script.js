@@ -52,18 +52,12 @@ function shuffleArray(array) {
 }
 
 // ランダムな選択肢を生成する
-function generateOptions(correctAnswer, allAnswers, count = 4) {
-    // 正解以外の選択肢を取得
-    const wrongAnswers = allAnswers.filter(answer => answer !== correctAnswer);
+function generateOptions(correctAnswer, allAnswers) {
+    // 全ての選択肢をシャッフルして返す
+    // return shuffleArray(allAnswers);
 
-    // ランダムに3つの不正解を選択
-    const shuffledWrong = shuffleArray(wrongAnswers);
-    const selectedWrong = shuffledWrong.slice(0, count - 1);
-
-    // 正解と不正解を組み合わせてシャッフル
-    const options = shuffleArray([correctAnswer, ...selectedWrong]);
-
-    return options;
+    // 全てをそのまま返す
+    return allAnswers
 }
 
 // 問題データの読み込み
@@ -77,7 +71,7 @@ async function loadQuestions() {
 
         // 各問題に選択肢を生成
         gameState.questions = data.questions.map(question => {
-            const options = generateOptions(question.correctAnswer, allAnswers, 4);
+            const options = generateOptions(question.correctAnswer, allAnswers);
             const correctAnswerIndex = options.indexOf(question.correctAnswer);
 
             return {

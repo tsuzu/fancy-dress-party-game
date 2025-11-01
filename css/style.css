@@ -216,13 +216,13 @@ body {
 
 .options-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
 .option-btn {
-    padding: 20px;
-    font-size: 1.1rem;
+    padding: 15px;
+    font-size: 0.95rem;
     background-color: rgba(78, 205, 196, 0.1);
     border: 2px solid var(--secondary-color);
     color: var(--text-color);
@@ -230,6 +230,8 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 500;
+    text-align: center;
+    word-wrap: break-word;
 }
 
 .option-btn:hover:not(:disabled) {
@@ -445,12 +447,12 @@ body {
     }
 
     .options-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .option-btn {
-        font-size: 1rem;
-        padding: 15px;
+        font-size: 0.9rem;
+        padding: 12px;
     }
 
     .overlay-icon {
@@ -482,6 +484,10 @@ body {
     .container {
         padding: 20px;
         border-radius: 15px;
+    }
+
+    .options-container {
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .btn {

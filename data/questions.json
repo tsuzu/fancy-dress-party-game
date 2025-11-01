@@ -1,12 +1,12 @@
 {
   "questions": [
     {
-      "id": 1,
-      "videoId": "wQYnPghoZZ4",
-      "videoTitle": "【超学生】仮装狂騒曲 @歌ってみた",
+      "id": 0,
+      "videoId": "8YNzp2vRS9I",
+      "videoTitle": "初星学園 「仮装狂騒曲」Official Music Video (HATSUBOSHI GAKUEN - Fancy dress party)",
       "startTime": 0,
       "question": "この曲を歌っているのは誰？",
-      "correctAnswer": "超学生 (Chogakusei Official)",
+      "correctAnswer": "倉本千奈、篠澤広、月村手毬",
       "songTitle": "仮装狂騒曲"
     },
     {
@@ -15,7 +15,7 @@
       "videoTitle": "【にじさんじ】仮装狂騒曲 Covered by ジョー・力一/周央サンゴ/壱百満天原サロメ/セラフ・ダズルガーデン/星導ショウ/栞葉るり #SitR広島",
       "startTime": 0,
       "question": "この曲を歌っているのは誰？",
-      "correctAnswer": "ジョー・力一、周央サンゴ、壱百満天原サロメ、セラフ・ダズルガーデン、星導ショウ、栞葉るり (ジョー・力一 Joe Rikiichi)",
+      "correctAnswer": "ジョー・力一、周央サンゴ、壱百満天原サロメ、セラフ・ダズルガーデン、星導ショウ、栞葉るり",
       "songTitle": "仮装狂騒曲"
     },
     {
@@ -24,7 +24,7 @@
       "videoTitle": "仮装狂騒曲 / covered by しぐれうい&花譜&星街すいせい",
       "startTime": 0,
       "question": "この曲を歌っているのは誰？",
-      "correctAnswer": "しぐれうい、花譜、星街すいせい (しぐれうい)",
+      "correctAnswer": "しぐれうい、花譜、星街すいせい",
       "songTitle": "仮装狂騒曲"
     },
     {
@@ -34,6 +34,78 @@
       "startTime": 0,
       "question": "この曲を歌っているのは誰？",
       "correctAnswer": "月ノ美兎、樋口楓、静凛 (月ノ美兎)",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 5,
+      "videoId": "VIr-gF2Q27w",
+      "videoTitle": "【FULL】仮装狂騒曲/初星学園【Covered by 缶缶 × 七海うらら × Hakos Baelz】",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "缶缶、七海うらら、Hakos Baelz",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 6,
+      "videoId": "8k-8td04bvs",
+      "videoTitle": "【学マス】仮装狂騒曲 - 初星学園 ／ 春歌みこと cover 【歌ってみた】",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "春歌みこと",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 7,
+      "videoId": "VXB6ZBsrhPc",
+      "videoTitle": "FAKE TYPE. \"仮装狂騒曲\" (Self Cover) MV",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "TOPHAMHAT-KYO",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 8,
+      "videoId": "tls5-b2u6Gg",
+      "videoTitle": "仮装狂騒曲(初星学園) / 歌ってみた by 天月×志麻×となりの坂田。",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "天月、志麻、となりの坂田",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 9,
+      "videoId": "lOkGgr7Bk10",
+      "videoTitle": "【学マス】仮装狂騒曲 /３人で歌ってみた【ver.花宮莉歌×藍月なくる×ななひら】",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "花宮莉歌、藍月なくる、ななひら",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 10,
+      "videoId": "uGHlYIck0CE",
+      "videoTitle": "仮装狂騒曲 / 倉持めると 戌亥とこ フレン・E・ルスタリオ cover",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "倉持めると、戌亥とこ、フレン・E・ルスタリオ",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 11,
+      "videoId": "10CsXB0yMJQ",
+      "videoTitle": "【歌ってみた】仮装狂騒曲 covered by 罪十罰",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "氷夏至、美古途、夕凪機",
+      "songTitle": "仮装狂騒曲"
+    },
+    {
+      "id": 1,
+      "videoId": "wQYnPghoZZ4",
+      "videoTitle": "【超学生】仮装狂騒曲 @歌ってみた",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "超学生",
       "songTitle": "仮装狂騒曲"
     }
   ]
