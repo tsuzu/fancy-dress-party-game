@@ -348,7 +348,7 @@ function shareOnX() {
     const accuracy = Math.round((score / total) * 100);
 
     // シェアテキストを作成
-    const text = `仮装狂騒曲当てゲームで${total}問中${score}問正解！正解率${accuracy}%でした！🎵\n#仮装狂騒曲当てゲーム`;
+    const text = `🎃 仮装狂騒曲当てゲーム 🎵で${total}問中${score}問正解！正解率${accuracy}%でした！🎵\n#仮装狂騒曲当てゲーム`;
 
     // 現在のページURLを取得
     const url = window.location.href;
