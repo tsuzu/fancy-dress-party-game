@@ -139,6 +139,7 @@ function onPlayerReady(event) {
 
 // プレーヤー状態変更時
 function onPlayerStateChange(event) {
+    checkAdStatus()
     if (event.data === YT.PlayerState.PLAYING) {
         gameState.isPlaying = true;
     } else if (event.data === YT.PlayerState.ENDED) {
@@ -163,19 +164,19 @@ function checkAdStatus() {
         const currentTime = gameState.player.getCurrentTime();
         const duration = gameState.player.getDuration();
 
-        // プレーヤーが再生中の場合
-        if (playerState === YT.PlayerState.PLAYING || playerState === YT.PlayerState.BUFFERING) {
-            // 広告判定: 現在時間が0未満、または動画の長さが取得できない場合は広告の可能性
-            // また、急に時間が0に戻った場合も広告の可能性
-            const isLikelyAd = currentTime < 0.5 && duration === 0;
+        // 広告判定:
+        // 1. UNSTARTED状態（広告再生中）
+        // 2. 動画の長さが取得できない場合
+        const isLikelyAd =
+            playerState === YT.PlayerState.UNSTARTED ||
+            duration === 0;
 
-            if (isLikelyAd) {
-                // 広告と判定 -> cropを有効化
-                elements.videoOverlay.classList.add('ad-playing');
-            } else if (currentTime > 0.5 && duration > 0) {
-                // 本編と判定 -> cropを無効化
-                elements.videoOverlay.classList.remove('ad-playing');
-            }
+        if (isLikelyAd) {
+            // 広告と判定 -> cropを有効化
+            elements.videoOverlay.classList.add('ad-playing');
+        } else {
+            // 本編と判定 -> cropを無効化
+            elements.videoOverlay.classList.remove('ad-playing');
         }
     } catch (error) {
         console.error('広告チェックエラー:', error);
@@ -192,8 +193,8 @@ function startAdDetection() {
     // 最初は広告モードをオフにする
     elements.videoOverlay.classList.remove('ad-playing');
 
-    // 500msごとに広告状態をチェック
-    adCheckInterval = setInterval(checkAdStatus, 500);
+    // 100msごとに広告状態をチェック
+    adCheckInterval = setInterval(checkAdStatus, 100);
 }
 
 // 広告検出を停止
