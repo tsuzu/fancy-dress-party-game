@@ -192,9 +192,9 @@ function checkAdStatus() {
                     adStartTime = Date.now();
                 }
 
-                // 5秒経過したらblurを表示
+                // 7秒経過したらblurを表示
                 const elapsedTime = (Date.now() - adStartTime) / 1000;
-                if (elapsedTime >= 6) {
+                if (elapsedTime >= 7) {
                     elements.adBlur.classList.add('show');
                 } else {
                     elements.adBlur.classList.remove('show');
@@ -304,6 +304,7 @@ function loadQuestion() {
     elements.currentQuestionDisplay.textContent = gameState.currentQuestionIndex + 1;
     elements.questionText.textContent = question.question;
     elements.feedbackContainer.classList.add('hidden');
+    elements.videoOverlay.classList.remove('hidden');
 
     // 選択肢の生成
     elements.optionsContainer.innerHTML = '';
@@ -327,6 +328,8 @@ function loadQuestion() {
 function selectAnswer(selectedIndex) {
     if (gameState.hasAnswered) return;
     gameState.hasAnswered = true;
+
+    elements.videoOverlay.classList.add('hidden');
 
     const currentTime = Date.now();
     let timeTaken = 0;
