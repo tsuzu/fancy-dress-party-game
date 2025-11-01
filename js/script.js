@@ -32,6 +32,7 @@ const elements = {
     feedbackDetails: document.getElementById('feedback-details'),
     nextButton: document.getElementById('next-button'),
     videoOverlay: document.getElementById('video-overlay'),
+    adBlur: document.getElementById('ad-blur'),
 
     // 結果画面
     finalScore: document.getElementById('final-score'),
@@ -154,6 +155,8 @@ function onPlayerStateChange(event) {
 
 // 広告検出用のインターバルID
 let adCheckInterval = null;
+// 広告開始時刻
+let adStartTime = null;
 
 // 広告の検出と表示切り替え
 function checkAdStatus() {
@@ -168,8 +171,7 @@ function checkAdStatus() {
         // 1. UNSTARTED状態（広告再生中）
         // 2. 動画の長さが取得できない場合
         const isLikelyAd =
-            (playerState === YT.PlayerState.UNSTARTED && currentTime > 0) ||
-            duration === 0;
+            (playerState === YT.PlayerState.UNSTARTED && currentTime > 0);
 
         const youtubePlayer = document.getElementById('youtube-player');
         if (youtubePlayer) {
@@ -177,10 +179,25 @@ function checkAdStatus() {
                 // 広告と判定 -> プレーヤーを縮小、オーバーレイを切り抜く
                 youtubePlayer.classList.add('ad-playing');
                 elements.videoOverlay.classList.add('ad-playing');
+
+                // 広告開始時刻を記録
+                if (adStartTime === null) {
+                    adStartTime = Date.now();
+                }
+
+                // 5秒経過したらblurを表示
+                const elapsedTime = (Date.now() - adStartTime) / 1000;
+                if (elapsedTime >= 5) {
+                    elements.adBlur.classList.add('show');
+                } else {
+                    elements.adBlur.classList.remove('show');
+                }
             } else {
                 // 本編と判定 -> プレーヤーを元のサイズに、オーバーレイを全画面に
                 youtubePlayer.classList.remove('ad-playing');
                 elements.videoOverlay.classList.remove('ad-playing');
+                elements.adBlur.classList.remove('show');
+                adStartTime = null;
             }
         }
     } catch (error) {
@@ -201,6 +218,8 @@ function startAdDetection() {
         youtubePlayer.classList.remove('ad-playing');
     }
     elements.videoOverlay.classList.remove('ad-playing');
+    elements.adBlur.classList.remove('show');
+    adStartTime = null;
 
     // 100msごとに広告状態をチェック
     adCheckInterval = setInterval(checkAdStatus, 100);
@@ -218,6 +237,8 @@ function stopAdDetection() {
         youtubePlayer.classList.remove('ad-playing');
     }
     elements.videoOverlay.classList.remove('ad-playing');
+    elements.adBlur.classList.remove('show');
+    adStartTime = null;
 }
 
 // 再生/一時停止ボタンの更新

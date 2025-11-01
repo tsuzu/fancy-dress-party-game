@@ -178,6 +178,25 @@ body {
     );
 }
 
+/* 広告用blur (プレーヤーとオーバーレイの間に配置) */
+.ad-blur {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 56px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    pointer-events: none;
+    display: none;
+}
+
+.ad-blur.show {
+    display: block;
+}
+
 .video-overlay {
     position: absolute;
     top: 0;
