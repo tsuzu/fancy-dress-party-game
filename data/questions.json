@@ -95,6 +95,22 @@
       "startTime": 0,
       "question": "この曲を歌っているのは誰？",
       "correctAnswer": "超学生"
+    },
+    {
+      "id": 12,
+      "videoId": "tM59aC_zrGs",
+      "videoTitle": "仮装狂騒曲【ルンルン×早乙女ベリー×司賀りこ/にじさんじ所属】【歌ってみた】",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "ルンルン、早乙女ベリー、司賀りこ"
+    },
+    {
+      "id": 13,
+      "videoId": "mYLlZ-P15Nk",
+      "videoTitle": "仮装狂騒曲 / 初星学園【covered by レトラ】",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "レトラ"
     }
   ]
 }
