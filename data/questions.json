@@ -111,6 +111,22 @@
       "startTime": 0,
       "question": "この曲を歌っているのは誰？",
       "correctAnswer": "レトラ"
+    },
+    {
+      "id": 14,
+      "videoId": "SgopUcp_RQE",
+      "videoTitle": "【学マス】仮装狂騒曲／響咲リオナ(Cover)ー初星学園",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "響咲リオナ"
+    },
+    {
+      "id": 14,
+      "videoId": "RCAELTy1EV4",
+      "videoTitle": "【学マス/うたってみた】仮装狂騒曲 / 初星学園 【杏戸ゆげ /ななしいんく】",
+      "startTime": 0,
+      "question": "この曲を歌っているのは誰？",
+      "correctAnswer": "杏戸ゆげ"
     }
   ]
 }
